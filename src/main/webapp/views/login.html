@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Авторизация</title>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <a class="navbar-brand" href="/">Hospital</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/doctor">Doctor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/nurse">Nurse</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<h3>Приветствуем! Для продолжения работы Вам необходимо авторизироваться в системе</h3>
+<div th:if="${param.error}">
+    <h4>Неверное имя пользователя или пароль</h4>
+</div>
+<div th:if="${param.logout}">
+    <h4>Вы вышли из аккаунта</h4>
+</div>
+<br>
+<form th:action="@{/login}" method="POST">
+    <p>
+        <label for="username">Логин: </label>
+        <input type="text" id="username" placeholder="Введи ваш логин..." size="20" name="username">
+    </p>
+    <p>
+        <label for="password">Пароль: </label>
+        <input type="password" id="password" placeholder="Введите ваш пароль..." size="20" name="password">
+    </p>
+    <p>
+        <input type="submit" value="Войти"/>
+        <button type="reset">Очистить поля</button>
+    </p>
+</form>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>

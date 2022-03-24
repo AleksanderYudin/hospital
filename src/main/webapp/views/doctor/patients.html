@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пациентов</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<br>
+<h3>Список всех пациентов:</h3>
+<div>
+    <table>
+        <thead>
+            <td width="30px">ID</td>
+            <td width="100px">Фамилия</td>
+            <td width="100px">Имя</td>
+            <td width="100px">Страховка №</td>
+            <td width="220px">Лечащий врач</td>
+            <td width="450px">Диагноз</td>
+            <td width="100px">Статус</td>
+        </thead>
+
+        <tr th:each="patient : ${patients}">
+            <td>
+                <a th:href="@{/doctor/patients/{id}(id=${patient.id})}" th:text="${patient.id}">id</a>
+            </td>
+            <td>
+                <a th:href="@{/doctor/patients/{id}(id=${patient.id})}" th:text="${patient.secondName}"/>
+            </td>
+            <td>
+                <a th:href="@{/doctor/patients/{id}(id=${patient.id})}" th:text="${patient.firstName}"/>
+            </td>
+            <td th:text="${patient.insurance}"/>
+            <td th:text="${patient.doctor.secondName} + ' ' + ${patient.doctor.firstName}"/>
+            <td th:text="${patient.diagnosis}"/>
+            <td th:text="${patient.status}"/>
+        </tr>
+    </table>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

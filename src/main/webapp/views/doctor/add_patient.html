@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить пациента</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<br>
+<h3>Добавление пациента (заполните форму):</h3>
+<div>
+    <form th:method="POST" th:action="@{/doctor/patients}" th:object="${patient}">
+    <table>
+        <thead>
+        <td width="100px">Имя</td>
+        <td width="100px">Фамилия</td>
+        <td width="100px">Страховка №</td>
+        <td width="450px">Диагноз</td>
+        <td width="90px">Статус</td>
+        </thead>
+        <tr>
+            <td>
+                <input type="text" th:field="*{firstName}" size="15"/>
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></div>
+            </td>
+            <td>
+                <input type="text" th:field="*{secondName}" size="15"/>
+                <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" style="color:red"></div>
+
+            </td>
+            <td>
+                <input type="text" th:field="*{insurance}" size="15"/>
+                <div th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}" style="color:red"></div>
+            </td>
+            <td>
+                <input type="text" th:field="*{diagnosis}" size="60"/>
+                <div th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}" style="color:red"></div>
+            </td>
+            <td>
+                <input type="text" size="15" name="status" value="ON_TREATMENT" readonly/>
+            </td>
+        </tr>
+    </table>
+        <br>
+        <input type="submit" value="Добавить"/>
+    </form>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

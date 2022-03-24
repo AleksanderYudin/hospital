@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Назначить процедуру</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<br>
+<h3 th:text="Пациент + ' ' + ${prescription.patient.firstName} + ' ' + ${prescription.patient.secondName}"></h3>
+<div>
+    <form th:method="POST" th:action="@{/doctor/prescriptions}" th:object="${prescription}">
+        <table>
+            <thead>
+            <td width="120px">Тип лечения</td>
+            <td width="450px">Способ лечения</td>
+            <td width="100px">Доза</td>
+            <td width="150">Начало лечения</td>
+            <td width="150px">Конец лечения</td>
+            <td width="150">Время процедуры/лекарств</td>
+            </thead>
+
+            <tr>
+                <input type="hidden" th:field="*{patient}"/>
+                <td>
+                    <select th:field="*{treatmentType}" size="2">
+                        <option value="MEDICAMENT" selected>MEDICAMENT</option>
+                        <option value="PROCEDURE">PROCEDURE</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" th:field="*{treatmentDescription}" size="45"/>
+                    <div th:if="${#fields.hasErrors('treatmentDescription')}" th:errors="*{treatmentDescription}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{dose}" size="15"/>
+                    <div th:if="${#fields.hasErrors('dose')}" th:errors="*{dose}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="date" th:field="*{startTreatment}" size="15"/>
+                    <div th:if="${#fields.hasErrors('startTreatment')}" th:errors="*{startTreatment}" style="color:red"></div>
+
+                </td>
+                <td>
+                    <input type="date" th:field="*{endTreatment}" size="15"/>
+                    <div th:if="${#fields.hasErrors('endTreatment')}" th:errors="*{endTreatment}" style="color:red"></div>
+
+                </td>
+                <td>
+                    <strong>Выберите время(Multiple):</strong>
+                    <select th:field="*{treatmentTime}" multiple="multiple" size="3">
+                        <option th:each="time: ${timeList}"
+                                th:value="${time}" th:text="${time}">
+                    </select>
+                    <div th:if="${#fields.hasErrors('treatmentTime')}" th:errors="*{treatmentTime}" style="color:red"></div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Назначить"/>
+    </form>
+</div>
+<br>
+<form th:method="GET" th:action="@{/doctor/patients/{id}(id=${prescription.patient.id})}">
+    <input type="submit" value="Отмена">
+</form>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

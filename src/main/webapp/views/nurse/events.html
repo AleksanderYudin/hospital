@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список событий</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+</head>
+
+<body>
+<div th:insert="~{fragments :: Navbar_Nurse}"></div>
+<br>
+<div>
+
+    <form th:method="GET" th:action="@{/nurse/events}">
+        <label for="startDate">Фильтр по дате: с </label>
+        <input type="datetime-local" id="startDate" name="startDate">
+
+        <label for="endDate"> по: </label>
+        <input type="datetime-local" id="endDate" name="endDate">
+
+        <label for="patient_id">Фильтр по ID пациента: </label>
+        <input type="number" id="patient_id" name="patient_id"
+               placeholder="Введите Id..." size="20" min="1"/>
+
+        <input type="submit" value="Применить"/>
+    </form>
+    <br>
+    <form method="GET" action="/nurse/events">
+        <input type="submit" value="Сбросить фильтры">
+    </form>
+    <br>
+    <h3>Список событий:</h3>
+    <table>
+        <thead>
+            <td width="40px">ID пациента</td>
+            <td width="180px">Пациент</td>
+            <td width="150px">Дата и время</td>
+            <td width="400px">Назначение</td>
+            <td width="180px">Лечащий врач</td>
+            <td width="100px">Статус</td>
+            <td width="130px">Комментарий</td>
+        </thead>
+        <tr th:each="event : ${eventList}">
+            <td>
+                <a th:text="${event.patient.id}"></a>
+            </td>
+            <td>
+                <a th:text="${event.patient.secondName} + ' ' + ${event.patient.firstName}"></a>
+            </td>
+            <td/>
+                <a th:text="${event.dateTime}"/>
+            </td>
+            <td>
+                <a th:text="${event.prescription.treatmentDescription} + ' (' + ${event.prescription.dose} + ') '"/>
+            </td>
+            <td th:text="${event.prescription.doctor.secondName} + ' ' + ${event.prescription.doctor.firstName}"/>
+            <td th:text="${event.eventStatus}"/>
+            <td th:text="${event.comment}"/>
+            <td>
+                <form th:method="GET" th:action="@{/nurse/events/edit/{id}(id=${event.id})}">
+                    <div th:if="${event.dateTime} < ${nowTime} and ${event.eventStatus.toString()} == 'PLANNED'">
+                        <input type="submit" value="Изменить статус" >
+                    </div>
+                    <div th:if="${event.dateTime} > ${nowTime} or ${event.eventStatus.toString()} != 'PLANNED'">
+                        <input type="submit" value="Изменить статус" disabled>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

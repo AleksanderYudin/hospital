@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: ServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.259 s <<< FAILURE! - in ServiceTest
+test  Time elapsed: 0.131 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at ServiceTest.test(ServiceTest.java:8)
+

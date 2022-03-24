@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация пользователей</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <a class="navbar-brand" href="/">Hospital</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <form th:action="@{/logout}" th:method="post">
+        <button type="submit" class="btn btn-primary">Выйти</button>
+    </form>
+</nav>
+<br>
+<div th:if="${message}">
+    <h2 th:text="${message}"></h2>
+</div>
+<h3>Для регистрации нового сотрудника заполните форму</h3>
+<br>
+<div>
+    <form th:method="POST" th:action="@{/registration}" th:object="${employee}">
+        <table>
+            <thead>
+            <td width="150">Имя</td>
+            <td width="150px">Фамилия</td>
+            <td width="150px">Профессия</td>
+            <td width="150px">Логин</td>
+            <td width="150px">Пароль</td>
+            </thead>
+            <tr>
+                <td>
+                    <input type="text" th:field="*{firstName}" size="20"/>
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{secondName}" size="20"/>
+                    <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" style="color:red"></div>
+                </td>
+                <td>
+                    <strong>Select role:</strong>
+                    <select th:field="*{role}" size="2">
+                        <option value="DOCTOR">DOCTOR</option>
+                        <option value="NURSE">NURSE</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{username}" size="20"/>
+                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red"></div>
+
+                </td>
+                <td>
+                    <input type="text" th:field="*{password}" size="20"/>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red"></div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Добавить"/>
+    </form>
+</div>
+<div th:insert="~{fragments :: Optionals}"></div>
+</body>
+</html>

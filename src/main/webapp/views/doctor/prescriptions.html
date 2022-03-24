@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Назначения</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<br>
+<h3>Список всех назначений:</h3>
+<div>
+    <table>
+        <thead>
+        <td width="30px">ID</td>
+        <td width="200px">Пациент</td>
+        <td width="100px">Тип лечения</td>
+        <td width="350px">Метод лечения</td>
+        <td width="70px">Доза</td>
+        <td width="100px">Начало лечения</td>
+        <td width="100px">Конец лечения</td>
+        <td width="150px">Время процедуры/лекарств</td>
+        <td width="200px">Врач</td>
+        </thead>
+        <tr th:each="prescription : ${prescriptions}">
+            <td>
+                <a th:href="@{/doctor/prescriptions/patients/{id}(id=${prescription.patient.id})}"
+                   th:text="${prescription.id}"/>
+            </td>
+            <td>
+                <a th:href="@{/doctor/prescriptions/patients/{id}(id=${prescription.patient.id})}"
+                   th:text="${prescription.patient.secondName} + ' ' + ${prescription.patient.firstName}"/>
+            </td>
+            <td>
+                <a th:text="${prescription.treatmentType}"/>
+            </td>
+            <td>
+                <a th:text="${prescription.treatmentDescription}"/>
+            </td>
+            <td th:text="${prescription.dose}"/>
+            <td th:text="${prescription.startTreatment}"/>
+            <td th:text="${prescription.endTreatment}"/>
+            <td th:text="${prescription.treatmentTime}"/>
+            <td th:text="${prescription.doctor.secondName} + ' ' + ${prescription.doctor.firstName}"/>
+        </tr>
+    </table>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование события</title>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+
+<body>
+<div th:insert="~{fragments :: Navbar_Nurse}"></div>
+<h2 th:text="'Пациент ' + ${event.patient.firstName} + ' ' + ${event.patient.secondName}"/>
+<h3 th:text="'Назначение: ' + ${event.prescription.treatmentDescription} + ' (' + ${event.prescription.dose} + '), ' + ${event.dateTime}"></h3>
+<div>
+    <form th:method="PATCH" th:action="@{/nurse/events/edit/{id}(id=${event.id})}">
+
+        <label for="status">Выберите статус: </label>
+        <select name="status" id="status" size="2">
+            <option value="DONE" selected>DONE</option>
+            <option value="CANCELLED">CANCELLED</option>
+        </select>
+
+        <label for="comment">Введите комментарий: </label>
+        <input type="text" id="comment" name="comment"
+               th:value="'Процедуру провел(а) ' + ${name}">
+
+        <input type="submit" value="Готово"/>
+    </form>
+    <br>
+    <form method="GET" action="/nurse/events">
+        <input type="submit" value="Отмена">
+    </form>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>

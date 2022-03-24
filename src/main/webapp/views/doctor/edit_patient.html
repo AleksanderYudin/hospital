@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование информации о пациенте</title>
+    <style>
+        td{
+            border: solid 1px silver;
+            text-align:center;
+            }
+    </style>
+    <div th:insert="~{fragments :: Bootstrap}"></div>
+
+</head>
+<body>
+<div th:insert="~{fragments :: Navbar}"></div>
+<br>
+<h2>Редактировать информацию о пациенте:</h2>
+<div>
+    <form th:method="PATCH" th:action="@{/doctor/patients/edit/{id}(id=${patient.id})}" th:object="${patient}">
+        <table>
+            <thead>
+            <td width="80px">Имя</td>
+            <td width="80px">Фамилия</td>
+            <td width="80px">Страховка №</td>
+            <td width="400px">Диагноз</td>
+            <td width="80px">Статус</td>
+            </thead>
+            <tr>
+                <td>
+                    <input type="text" th:field="*{firstName}" size="15"/>
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{secondName}" size="15"/>
+                    <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{insurance}" size="15"/>
+                    <div th:if="${#fields.hasErrors('insurance')}" th:errors="*{insurance}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{diagnosis}" size="60"/>
+                    <div th:if="${#fields.hasErrors('diagnosis')}" th:errors="*{diagnosis}" style="color:red"></div>
+                </td>
+                <td>
+                    <input type="text" th:field="*{status}" size="15" readonly/>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Готово"/>
+    </form>
+    <br>
+    <form th:method="GET" th:action="@{/doctor/patients/{id}(id=${patient.id})}">
+        <input type="submit" value="Отмена">
+    </form>
+</div>
+
+<div th:insert="~{fragments :: Optionals}"></div>
+
+</body>
+</html>
