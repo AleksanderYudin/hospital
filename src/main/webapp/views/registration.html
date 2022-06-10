@@ -24,8 +24,15 @@
     </form>
 </nav>
 <br>
-<div th:if="${message}">
-    <h2 th:text="${message}"></h2>
+<div th:if="${message1}">
+    <div class="alert alert-danger mt-4 ml-3" role="alert">
+        <h2 th:text="${message}"></h2>
+    </div>
+</div>
+<div th:if="${message2}">
+    <div class="alert alert-success mt-4 ml-3" role="alert">
+        <h2 th:text="${message}"></h2>
+    </div>
 </div>
 <h3>Для регистрации нового сотрудника заполните форму</h3>
 <br>
@@ -36,6 +43,7 @@
             <td width="150">Имя</td>
             <td width="150px">Фамилия</td>
             <td width="150px">Профессия</td>
+            <td width="150px">Квалификация</td>
             <td width="150px">Логин</td>
             <td width="150px">Пароль</td>
             </thead>
@@ -56,6 +64,20 @@
                         <option value="ADMIN">ADMIN</option>
                     </select>
                     <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color:red"></div>
+                </td>
+                <td>
+                    <strong>Укажите квалификацию:</strong>
+                    <select th:field="*{qualification}" size="2">
+                        <option value="терапевт">терапевт</option>
+                        <option value="хирург">хирург</option>
+                        <option value="педиатр">педиатр</option>
+                        <option value="офтальмолог">офтальмолог</option>
+                        <option value="стоматолог">стоматолог</option>
+                        <option value="медсестра">медсестра</option>
+                        <option value="admin">admin</option>
+
+                    </select>
+                    <div th:if="${#fields.hasErrors('role')}" th:errors="*{qualification}" style="color:red"></div>
                 </td>
                 <td>
                     <input type="text" th:field="*{username}" size="20"/>

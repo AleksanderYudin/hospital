@@ -36,13 +36,13 @@ public class RegistrationController {
         if(bindingResult.hasErrors()) return "registration";
         if(!userService.addUser(employee)) {
             model.addAttribute("employee", new Employee());
-            model.addAttribute("message",
+            model.addAttribute("message1",
                     "Пользователь с таким логином уже существует!");
             return "registration";
         }
         else {
             model.addAttribute("employee", new Employee());
-            model.addAttribute("message",
+            model.addAttribute("message2",
                     "Пользователь успешно добавлен!");
             return "registration";
         }

@@ -18,13 +18,15 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Log4j2
 public class HospitalApplication implements WebMvcConfigurer {
 
+
+
     public static void main(String[] args) {
         SpringApplication.run(HospitalApplication.class, args);
         log.info("Приложение запущено");
     }
 
-    private final ApplicationContext applicationContext;
 
+    private final ApplicationContext applicationContext;
     @Autowired
     public HospitalApplication(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;

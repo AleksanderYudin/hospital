@@ -3,7 +3,8 @@ create table employee (
     first_name varchar(255) not null,
     second_name varchar(255) not null,
     role varchar(255) not null,
-    username varchar(255) not null,
+    qualification varchar(255) not null,
+    username varchar(255) unique not null,
     password varchar(255) not null,
     active boolean not null,
     primary key (id)

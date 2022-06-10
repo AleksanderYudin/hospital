@@ -36,6 +36,8 @@ public class Employee implements UserDetails {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Укажите 'должность'")
     private Role role;
+    @NotEmpty(message = "Укажите кваливикацию: терапевт, хирург и т.п.")
+    private String qualification;
     @NotEmpty(message = "Логин не может быть нулевой длины")
     @Size(min = 4, max = 12, message = "От 4х до 12 символов")
     private String username;
