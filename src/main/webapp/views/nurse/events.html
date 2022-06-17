@@ -28,11 +28,11 @@
         <input type="number" id="patient_id" name="patient_id"
                placeholder="Введите Id..." size="20" min="1"/>
 
-        <input type="submit" value="Применить"/>
+        <button type="submit" class="btn btn-primary">Применить</button>
     </form>
     <br>
     <form method="GET" action="/nurse/events">
-        <input type="submit" value="Сбросить фильтры">
+        <button type="submit" class="btn btn-primary">Сбросить фильтры</button>
     </form>
     <br>
     <h3>Список событий:</h3>
@@ -65,10 +65,10 @@
             <td>
                 <form th:method="GET" th:action="@{/nurse/events/edit/{id}(id=${event.id})}">
                     <div th:if="${event.dateTime} < ${nowTime} and ${event.eventStatus.toString()} == 'PLANNED'">
-                        <input type="submit" value="Изменить статус" >
+                        <button type="submit" class="btn btn-primary">Изменить статус</button>
                     </div>
                     <div th:if="${event.dateTime} > ${nowTime} or ${event.eventStatus.toString()} != 'PLANNED'">
-                        <input type="submit" value="Изменить статус" disabled>
+                        <button type="submit" class="btn btn-primary" disabled>Изменить статус</button>
                     </div>
                 </form>
             </td>

@@ -36,17 +36,17 @@
             <td th:text="${patient.status}"/>
             <td>
                 <form th:method="GET" th:action="@{/doctor/prescriptions/patients/{id}/new/(id=${patient.id})}">
-                    <input type="submit" value="Назначить лечение">
+                    <button type="submit" class="btn btn-primary">Назначить лечение</button>
                 </form>
             </td>
             <td>
                 <form th:method="GET" th:action="@{/doctor/prescriptions/patients/{id}(id=${patient.id})}">
-                    <input type="submit" value="Список назначений">
+                    <button type="submit" class="btn btn-primary">Список назначений</button>
                 </form>
             </td>
             <td>
                 <form th:method="PATCH" th:action="@{/doctor/patients/{id}(id=${patient.id})}">
-                    <input type="submit" value="Выписать">
+                    <button type="submit" class="btn btn-primary">Выписать</button>
                 </form>
             </td>
         </tr>
@@ -54,11 +54,11 @@
 </div>
     <br>
     <form th:method="GET" th:action="@{/doctor/patients/edit/{id}(id=${patient.id})}">
-        <input type="submit" value="Редактировать">
+        <button type="submit" class="btn btn-primary">Редактировать</button>
     </form>
     <br>
     <form th:method="DELETE" th:action="@{/doctor/patients/{id}(id=${patient.id})}">
-        <input type="submit" value="Удалить пациента">
+        <button type="submit" class="btn btn-primary">Удалить</button>
     </form>
 
 <div th:insert="~{fragments :: Optionals}"></div>

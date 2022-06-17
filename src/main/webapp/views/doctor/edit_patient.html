@@ -49,11 +49,11 @@
             </tr>
         </table>
         <br>
-        <input type="submit" value="Готово"/>
+        <button type="submit" class="btn btn-primary">Готово</button>
     </form>
     <br>
     <form th:method="GET" th:action="@{/doctor/patients/{id}(id=${patient.id})}">
-        <input type="submit" value="Отмена">
+        <button type="submit" class="btn btn-primary">Отмена</button>
     </form>
 </div>
 

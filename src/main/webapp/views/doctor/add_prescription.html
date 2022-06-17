@@ -66,12 +66,12 @@
             </tr>
         </table>
         <br>
-        <input type="submit" value="Назначить"/>
+        <button type="submit" class="btn btn-primary">Назначить</button>
     </form>
 </div>
 <br>
 <form th:method="GET" th:action="@{/doctor/patients/{id}(id=${prescription.patient.id})}">
-    <input type="submit" value="Отмена">
+    <button type="submit" class="btn btn-primary">Отмена</button>
 </form>
 
 <div th:insert="~{fragments :: Optionals}"></div>

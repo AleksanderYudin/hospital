@@ -38,51 +38,32 @@ public class KafkaListeners {
 //        System.out.println(record.partition());
 //        System.out.println(record.key());
 //        System.out.println(record.value());
-        System.out.println("Request with uuid = " + record.key() + " received...");
-        Thread newThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("CurrentThread" + Thread.currentThread().toString() + ", time: " + OffsetDateTime.now());
-                if(record.value().contains("doctorsList")) {
-                    List<DoctorDto> employeesList = new ArrayList<>();
-                    employeeRepository.findByRole(Role.DOCTOR)
-                            .forEach(doctor -> {
-                                employeesList.add(new DoctorDto(doctor.getId(),
-                                        doctor.getFirstName() + ' ' + doctor.getSecondName(),
-                                        doctor.getQualification(),
-                                        null));
-                            });
-
-                    String doctorsList = "";
-                    try {
-                        doctorsList = objectMapper.writeValueAsString(employeesList);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                    ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-                            .send("hospital_to_hospital2_doctorsList", record.key(), doctorsList);
-                    System.out.println("Response with uuid = " + record.key() + " transmit...");
-                    future.addCallback(System.out::println, System.err::println);
-                    kafkaTemplate.flush();
-                    System.out.println("Thread " + record.key() + " ended");
-                }
-                else {
-                    ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-                            .send("hospital_to_hospital2_doctorsList", record.key(), "error");
-                    System.out.println("Response with uuid = " + record.key() + " transmit...");
-                    future.addCallback(System.out::println, System.err::println);
-                    kafkaTemplate.flush();
-                }
+        if(record.value().contains("doctorsList")) {
+            List<DoctorDto> employeesList = new ArrayList<>();
+            employeeRepository.findByRole(Role.DOCTOR)
+                    .forEach(doctor -> {
+                        employeesList.add(new DoctorDto(doctor.getId(),
+                                doctor.getFirstName() + ' ' + doctor.getSecondName(),
+                                doctor.getQualification(),
+                                null));
+                    });
+            String doctorsList = "";
+            try {
+                doctorsList = objectMapper.writeValueAsString(employeesList);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
             }
-        }, record.key());
-        newThread.start();
-        System.out.println("Thread " + record.key() + " started");
-
+            ListenableFuture<SendResult<String, String>> future = kafkaTemplate
+                    .send("hospital_to_hospital2_doctorsList", record.key(), doctorsList);
+            future.addCallback(System.out::println, System.err::println);
+            kafkaTemplate.flush();
+        }
+        else {
+            ListenableFuture<SendResult<String, String>> future = kafkaTemplate
+                    .send("hospital_to_hospital2_doctorsList", record.key(), "error");
+            future.addCallback(System.out::println, System.err::println);
+            kafkaTemplate.flush();
+        }
     }
 }

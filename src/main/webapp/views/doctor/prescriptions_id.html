@@ -51,17 +51,17 @@
             <td th:text="${prescription.doctor.secondName} + ' ' + ${prescription.doctor.firstName}"/>
             <td>
                 <form th:method="GET" th:action="@{/doctor/prescriptions/edit/{id}(id=${prescription.id})}">
-                    <input type="submit" value="Редактировать">
+                    <button type="submit" class="btn btn-primary">Редактировать</button>
                 </form>
             </td>
             <td>
                 <form th:method="PATCH" th:action="@{/doctor/prescriptions/edit/{id}(id=${prescription.id})}">
-                    <input type="submit" value="Отменить">
+                    <button type="submit" class="btn btn-primary">Отменить</button>
                 </form>
             </td>
             <td>
                 <form th:method="DELETE" th:action="@{/doctor/prescriptions/{id}(id=${prescription.id})}">
-                    <input type="submit" value="Удалить">
+                    <button type="submit" class="btn btn-primary">Удалить</button>
                 </form>
             </td>
         </tr>

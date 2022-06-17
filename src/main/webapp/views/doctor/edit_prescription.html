@@ -72,12 +72,12 @@
             </tr>
         </table>
         <br>
-        <input type="submit" value="Сохранить"/>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 </div>
 <br>
 <form th:method="GET" th:action="@{/doctor/prescriptions/patients/{id}(id=${prescription.patient.id})}">
-    <input type="submit" value="Отмена">
+    <button type="submit" class="btn btn-primary">Отмена</button>
 </form>
 
 <div th:insert="~{fragments :: Optionals}"></div>
