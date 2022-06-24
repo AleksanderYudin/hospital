@@ -59,11 +59,20 @@ public class KafkaListeners {
             future.addCallback(System.out::println, System.err::println);
             kafkaTemplate.flush();
         }
+
         else {
-            ListenableFuture<SendResult<String, String>> future = kafkaTemplate
-                    .send("hospital_to_hospital2_doctorsList", record.key(), "error");
-            future.addCallback(System.out::println, System.err::println);
-            kafkaTemplate.flush();
+//            DoctorDto doctorDto = new DoctorDto();
+//            employeeRepository.findById(Integer.getInteger(record.value())).;
+//            String doctor = "";
+//            try {
+//                doctorDto = objectMapper.writeValueAsString(employeesList);
+//            } catch (JsonProcessingException e) {
+//                throw new RuntimeException(e);
+//            }
+//            ListenableFuture<SendResult<String, String>> future = kafkaTemplate
+//                    .send("hospital_to_hospital2_doctorsList", record.key(), doctorDto);
+//            future.addCallback(System.out::println, System.err::println);
+//            kafkaTemplate.flush();
         }
     }
 }
