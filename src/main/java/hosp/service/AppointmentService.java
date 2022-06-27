@@ -33,7 +33,7 @@ public class AppointmentService {
         for(int i = 0; i < 8; i++) {
             LocalDateTime dateTime = LocalDateTime.of(LocalDateTime.now().getYear(), LocalDateTime.now().getMonth(),
                             LocalDateTime.now().getDayOfMonth(),9 + i,0);
-            appointmentRepository.saveAppointments(doctor.getId(), dateTime, true);
+            System.out.println("Сохранено:\n" + appointmentRepository.saveAppointment(doctor.getId(), dateTime.plusDays(1), true));
         }
     }
 }
