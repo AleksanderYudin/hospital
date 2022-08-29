@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
-@EnableScheduling
+//@Component
+//@EnableScheduling
 public class AppointmentService {
 
     private  final AppointmentRepository appointmentRepository;
