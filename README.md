@@ -1,6 +1,6 @@
 
 ## Hospital 
-Это многопользовательское приложение типа клиент-сервер, моделирующее работу информационной системы 
+Это многопользовательское приложение типа клиент-сервер с веб-интерфейсом, моделирующее работу информационной системы 
 автоматизации документооборота медицинского учреждения. 
 
 ### Приложение обеспечивает следующую функциональность:
@@ -23,6 +23,6 @@
 * Для администратора:
   - добавление в систему новых врачей / медсестер.  
   
-**Используемые технологии:**  Maven, Tomcat, PostgreSQL, JPA, Flyway, Spring Framework (Boot Starter Web, Data JPA, 
-Security, Session JDBC), Lombok, Log4j, JSP, Thymeleaf, Bootstrap.
+**Используемые технологии:**  Maven, Tomcat, PostgreSQL, Flyway, Spring Framework (Boot Starter Web, Data JPA, 
+Security, Session JDBC), Lombok, Log4j, JSP, Thymeleaf, Bootstrap, Jaeger, Apache Kafka.
 
